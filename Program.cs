@@ -39,15 +39,32 @@ namespace Labaratoriniai_csharp
                     var vardas = Console.ReadLine();
                     Console.WriteLine("parasykite studento pavarde: ");
                     var pavarde = Console.ReadLine();
-                    Console.WriteLine("parasykite studento balus, kai baigsite parasykite -1: ");
                     double balas = 0;
                     List<double> balai = new List<double>();
-                    while (balas != -1)
+                    Console.WriteLine("ar norite kad studento balai butu sugeneruojami? 1- taip, bet koks kitas skaicius/simbolis -ne");
+                    var meniuBal = Console.ReadLine();
+                    if (meniuBal.Equals("1"))
                     {
-                        balas = Convert.ToDouble(Console.ReadLine());
-                        if (balas != -1)
+                        //bus sukuriama 1-8 skaiciu nuo 1 iki 10.
+                        Random rnd = new Random();
+                        int randnumber = rnd.Next(1, 9);
+                        for (int ctr = 0; ctr < randnumber ; ctr++)
                         {
-                            balai.Add(balas);
+                            balai.Add(rnd.Next(1, 11));
+                            //Console.WriteLine(balai[ctr]);
+                        }
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("parasykite studento balus, kai baigsite parasykite -1: ");
+                        while (balas != -1)
+                        {
+                            balas = Convert.ToDouble(Console.ReadLine());
+                            if (balas != -1)
+                            {
+                                balai.Add(balas);
+                            }
                         }
                     }
                     double[] ndRez = new double[balai.Count];
@@ -58,6 +75,7 @@ namespace Labaratoriniai_csharp
                         i++;
                     }
                     Console.WriteLine("parasykite studento egzamino rezultata: ");
+
                     double egzRez = Convert.ToDouble(Console.ReadLine());
                     studentai.Add(new Studentas(vardas, pavarde, ndRez, egzRez));
                 }
