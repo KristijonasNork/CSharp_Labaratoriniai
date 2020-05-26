@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 namespace Labaratoriniai_csharp
 {
-    class Studentas{
-        string vardas, pavarde;
-        double[] ndRez;
-        double egzRez;
+    public class Studentas{
+        public string vardas, pavarde;
+        public double[] ndRez;
+        public double egzRez;
 
-        Studentas(string vardas, string pavarde, double[] ndRez, double egzRez)
+        public Studentas(string vardas, string pavarde, double[] ndRez, double egzRez)
         {
             this.vardas = vardas;
             this.pavarde = pavarde;
             this.ndRez = ndRez;
             this.egzRez = egzRez;
         }
+        
     }
 
 
@@ -28,9 +29,9 @@ namespace Labaratoriniai_csharp
             {
 
                 Console.WriteLine("1.irasyti studentus ");
+                Console.WriteLine("2.rodyti studentus ");
                 Console.WriteLine("2.iseiti ");
                 var meniu = Console.ReadLine();
-
                 if (meniu.Equals("1")) {
                     Console.WriteLine("parasykite studento varda: ");
                     var vardas = Console.ReadLine();
@@ -54,12 +55,28 @@ namespace Labaratoriniai_csharp
                         ndRez[i] = bal;
                         i++;
                     }
-
-                    Console.WriteLine("parasykite studento pavarde: ");
-                    double egzRez = Console.ReadLine();
-
+                    Console.WriteLine("parasykite studento egzamino rezultata: ");
+                    double egzRez = Convert.ToDouble(Console.ReadLine());
+                    studentai.Add(new Studentas(vardas, pavarde, ndRez, egzRez));
                 }
                 if (meniu.Equals("2"))
+                {
+                    Console.WriteLine(String.Format("{0,-15} {1,-15} {2}", "Vardas", "Pavarde", "Galutinis (Vid.)"));
+                    Console.WriteLine("-----------------------------------------------------------------------");
+                    foreach (Studentas stud in studentai)
+                    {
+                        Console.WriteLine( stud.vardas + "             " + stud.pavarde);
+                        Console.WriteLine("--------------------------------------------------");
+                        foreach (int rezul in stud.ndRez)
+                        {
+                            Console.WriteLine(stud.ndRez[rezul]);
+                            //
+                        }
+
+                        Console.WriteLine(stud.egzRez);
+                    }
+                }
+                if (meniu.Equals("3"))
                 {
                     break;
                 }
