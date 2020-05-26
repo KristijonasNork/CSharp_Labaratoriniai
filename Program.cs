@@ -5,10 +5,10 @@ namespace Labaratoriniai_csharp
 {
     class Studentas{
         string vardas, pavarde;
-        int[] ndRez;
-        int egzRez;
+        double[] ndRez;
+        double egzRez;
 
-        Studentas(string vardas, string pavarde, int[] ndRez, int egzRez)
+        Studentas(string vardas, string pavarde, double[] ndRez, double egzRez)
         {
             this.vardas = vardas;
             this.pavarde = pavarde;
@@ -26,13 +26,37 @@ namespace Labaratoriniai_csharp
             List<Studentas> studentai = new List<Studentas>();
             while (true)
             {
+
                 Console.WriteLine("1.irasyti studentus ");
                 Console.WriteLine("2.iseiti ");
                 var meniu = Console.ReadLine();
-                if (meniu.Equals("1")) {
 
+                if (meniu.Equals("1")) {
                     Console.WriteLine("parasykite studento varda: ");
-                    Console.ReadLine();
+                    var vardas = Console.ReadLine();
+                    Console.WriteLine("parasykite studento pavarde: ");
+                    var pavarde = Console.ReadLine();
+                    Console.WriteLine("parasykite studento balus, kai baigsite parasykite -1: ");
+                    double balas = 0;
+                    List<double> balai = new List<double>();
+                    while (balas != -1)
+                    {
+                        balas = Convert.ToDouble(Console.ReadLine());
+                        if (balas != -1)
+                        {
+                            balai.Add(balas);
+                        }
+                    }
+                    double[] ndRez = new double[balai.Count];
+                    int i = 0;
+                    foreach(double bal in balai)
+                    {
+                        ndRez[i] = bal;
+                        i++;
+                    }
+
+                    Console.WriteLine("parasykite studento pavarde: ");
+                    double egzRez = Console.ReadLine();
 
                 }
                 if (meniu.Equals("2"))
