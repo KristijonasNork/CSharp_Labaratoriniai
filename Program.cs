@@ -35,6 +35,7 @@ namespace Labaratoriniai_csharp
                 Console.WriteLine("2.iseiti ");
                 var meniu = Console.ReadLine();
                 if (meniu.Equals("1")) {
+                    Random rnd = new Random();
                     Console.WriteLine("parasykite studento varda: ");
                     var vardas = Console.ReadLine();
                     Console.WriteLine("parasykite studento pavarde: ");
@@ -46,7 +47,6 @@ namespace Labaratoriniai_csharp
                     if (meniuBal.Equals("1"))
                     {
                         //bus sukuriama 1-8 skaiciu nuo 1 iki 10.
-                        Random rnd = new Random();
                         int randnumber = rnd.Next(1, 9);
                         for (int ctr = 0; ctr < randnumber ; ctr++)
                         {
@@ -74,9 +74,17 @@ namespace Labaratoriniai_csharp
                         ndRez[i] = bal;
                         i++;
                     }
-                    Console.WriteLine("parasykite studento egzamino rezultata: ");
-
-                    double egzRez = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("ar norite kad studento egzamino rezultatas butu sugeneruojamas? 1- taip, bet koks kitas skaicius/simbolis -ne");
+                    var meniuRez = Console.ReadLine();
+                    double egzRez = 0;
+                    if (meniuRez.Equals("1"))
+                    {
+                        egzRez = rnd.Next(1, 11);
+                    }
+                    else
+                    {
+                        egzRez = Convert.ToDouble(Console.ReadLine());
+                    }
                     studentai.Add(new Studentas(vardas, pavarde, ndRez, egzRez));
                 }
                 if (meniu.Equals("2"))
