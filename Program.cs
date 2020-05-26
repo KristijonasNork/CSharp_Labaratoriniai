@@ -25,6 +25,8 @@ namespace Labaratoriniai_csharp
         static void Main(string[] args)
         {
             List<Studentas> studentai = new List<Studentas>();
+            studentai.Add(new Studentas("Tomas", "Petraitis", new double[] { 4, 8, 3, 6, 7 }, 7));
+            studentai.Add(new Studentas("Adomas", "Adomaitis", new double[] {9, 8, 10, 9, 10 }, 9));
             while (true)
             {
 
@@ -65,16 +67,17 @@ namespace Labaratoriniai_csharp
                     Console.WriteLine("-----------------------------------------------------------------------");
                     foreach (Studentas stud in studentai)
                     {
-                        Console.WriteLine( stud.vardas + "             " + stud.pavarde);
-                        Console.WriteLine("--------------------------------------------------");
-                        foreach (int rezul in stud.ndRez)
+                        double vidurkis = 0;
+                        foreach (double rezul in stud.ndRez)
                         {
-                            Console.WriteLine(stud.ndRez[rezul]);
-                            //
+                            vidurkis += rezul;
                         }
+                        vidurkis = vidurkis / stud.ndRez.Length;
+                        double galutinis = 0.3 * vidurkis + 0.7 * stud.egzRez;
+                        Console.WriteLine("{0,-15} {1,-15} {2}", stud.vardas, stud.pavarde, vidurkis);
 
-                        Console.WriteLine(stud.egzRez);
                     }
+
                 }
                 if (meniu.Equals("3"))
                 {
