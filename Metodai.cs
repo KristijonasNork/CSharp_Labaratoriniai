@@ -57,7 +57,7 @@ namespace Labaratoriniai_csharp
                 using (StreamWriter file = new StreamWriter("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/studentai" + i + ".txt"))
                 {
                     
-                    for (int j = 1; j <= Math.Pow(10, i); j++)
+                    for (int j = 1; j <= Math.Pow(10, i+1); j++) // kuriami bus nuo 100 o ne nuo 1000 taupant kompiuterio resursus
                     {
                         string vardas = "Vardas" + j;
                         string pavarde = "Pavarde" + j;
@@ -66,7 +66,7 @@ namespace Labaratoriniai_csharp
                         for (int n = 0; n < 5; n++)
                             ndRez[n] = rnd.Next(1, 11);
                         Studentas studentas = new Studentas(vardas, pavarde, ndRez, egzRez);
-                        file.WriteLine(studentas);
+                        file.WriteLine(studentas.ToString());
                     }
 
                 }
