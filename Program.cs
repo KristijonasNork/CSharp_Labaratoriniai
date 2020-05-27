@@ -97,6 +97,8 @@ namespace Labaratoriniai_csharp
                     {
                         Console.WriteLine(String.Format("{0,-15} {1,-15} {2}", "Vardas", "Pavarde", "Galutinis (Vid.)"));
                         Console.WriteLine("-----------------------------------------------------------------------");
+
+                        studentai.Sort((x, y) => x.vardas.CompareTo(y.vardas));
                         foreach (Studentas stud in studentai)
                         {
                             double vidurkis = 0;
@@ -126,23 +128,21 @@ namespace Labaratoriniai_csharp
                     }
                 }
                 if (meniu.Equals("3")) {
-
-
+                    Console.WriteLine("Parasykite kelia iki norimo failo.");
                     //string tempFailas = "C:/Users/Kristijonas/source/repos/asdasd/asdasd/Zodynas.txt";
                     string tempFailas = Console.ReadLine();
                     if (File.Exists(tempFailas))
                     {
-                        using (StreamReader sr = new StreamReader(tempFailas)) //bandoma sutvarkyti nesirodancias lenkų/lietuvių raides
+                        using (StreamReader sr = new StreamReader(tempFailas))
                         {
                             string line = sr.ReadLine();
-
                             while (!string.IsNullOrEmpty((line = sr.ReadLine())))
                             {
-
                                 // Vardas Pavardė ND1 ND2 ND3 ND4 ND5 Egzaminas
                                 var reiksmes = line.Split(" ");
                                 var vardas = reiksmes[0];
                                 var pavarde = reiksmes[1];
+                                Console.WriteLine(reiksmes);
                                 double[] namuDarbai = new double[5] { Convert.ToDouble(reiksmes[2]) , Convert.ToDouble(reiksmes[3]), Convert.ToDouble(reiksmes[4]), Convert.ToDouble(reiksmes[5]), Convert.ToDouble(reiksmes[6]) };
                                 double egzBalas = Convert.ToDouble(reiksmes[7]);
                                 studentai.Add(new Studentas(vardas, pavarde, namuDarbai, egzBalas));
@@ -155,10 +155,9 @@ namespace Labaratoriniai_csharp
                     else
                     {
                         Console.WriteLine("Failas neegzistuoja.");
-
                     }
                 }
-                    if (meniu.Equals("4"))
+                if (meniu.Equals("4"))
                 {
                     break;
                 }
