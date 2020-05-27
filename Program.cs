@@ -4,22 +4,6 @@ using System.IO;
 
 namespace Labaratoriniai_csharp
 {
-    public class Studentas{
-        public string vardas, pavarde;
-        public double[] ndRez;
-        public double egzRez;
-
-        public Studentas(string vardas, string pavarde, double[] ndRez, double egzRez)
-        {
-            this.vardas = vardas;
-            this.pavarde = pavarde;
-            this.ndRez = ndRez;
-            this.egzRez = egzRez;
-        }
-        
-    }
-
-
 
     class Program
     {
@@ -53,7 +37,7 @@ namespace Labaratoriniai_csharp
                         for (int ctr = 0; ctr < randnumber ; ctr++)
                         {
                             balai.Add(rnd.Next(1, 11));
-                            //Console.WriteLine(balai[ctr]);
+                            Console.WriteLine(balai[ctr]);
                         }
                         
                     }
