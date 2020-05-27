@@ -12,6 +12,7 @@ namespace Labaratoriniai_csharp
             List<Studentas> studentai = new List<Studentas>();
             studentai.Add(new Studentas("Tomas", "Petraitis", new double[] { 4, 8.33, 3, 6, 7 }, 7));
             studentai.Add(new Studentas("Adomas", "Adomaitis", new double[] {9, 8.7, 10, 9, 10 }, 9));
+            Metodai m = new Metodai();
             while (true)
             {
 
@@ -124,42 +125,9 @@ namespace Labaratoriniai_csharp
                     }
                 }
                 if (meniu.Equals("3")) {
-                    Console.WriteLine("Parasykite kelia iki norimo failo.");
-                    string tempFailas = Console.ReadLine();
-                    if (File.Exists(tempFailas))
-                    {
-                        using (StreamReader sr = new StreamReader(tempFailas))
-                        {
-                            string line = sr.ReadLine();
-                            while (!string.IsNullOrEmpty((line = sr.ReadLine())))
-                            {
-                                try
-                                {
-                                    // Vardas Pavardė ND1 ND2 ND3 ND4 ND5 Egzaminas
-                                    var reiksmes = line.Split(" ");
-                                    var vardas = reiksmes[0];
-                                    var pavarde = reiksmes[1];
-                                    Console.WriteLine(reiksmes);
-                                    double[] namuDarbai = new double[5] { Convert.ToDouble(reiksmes[2]), Convert.ToDouble(reiksmes[3]), Convert.ToDouble(reiksmes[4]), Convert.ToDouble(reiksmes[5]), Convert.ToDouble(reiksmes[6]) };
-                                    double egzBalas = Convert.ToDouble(reiksmes[7]);
-                                    studentai.Add(new Studentas(vardas, pavarde, namuDarbai, egzBalas));
-                                    // C:\Users\Kristijonas\source\repos\Labaratoriniai_csharp\Labaratoriniai_csharp\Studentai.txt
-                                    Console.WriteLine("pridetasstudentas " + vardas + " " + pavarde);
-                                }
-                                catch(Exception e)
-                                {
-                                    Console.WriteLine(e);
-                                    Console.WriteLine("blogai suformatuotas failas");
-                                    break;
-                                }
-                                Console.WriteLine("Failas egzistuoja ir yra ikeltas.");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Failas neegzistuoja.");
-                    }
+                    foreach (Studentas s in m.ReadFromFile())
+                        studentai.Add(s);
+                    Console.WriteLine("Pridėti studentai");
                 }
                 if (meniu.Equals("4"))
                 {
