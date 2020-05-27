@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Labaratoriniai_csharp
 {
@@ -31,8 +32,9 @@ namespace Labaratoriniai_csharp
             {
 
                 Console.WriteLine("1.irasyti studentus ");
-                Console.WriteLine("2.rodyti studentus ");
-                Console.WriteLine("2.iseiti ");
+                Console.WriteLine("2.rodyti studentus "); 
+                Console.WriteLine("3.nuskaitymas i6 failo ir jo vaizdavimas");
+                Console.WriteLine("4.iseiti ");
                 var meniu = Console.ReadLine();
                 if (meniu.Equals("1")) {
                     Random rnd = new Random();
@@ -123,7 +125,40 @@ namespace Labaratoriniai_csharp
                         }
                     }
                 }
-                if (meniu.Equals("3"))
+                if (meniu.Equals("3")) {
+
+
+                    //string tempFailas = "C:/Users/Kristijonas/source/repos/asdasd/asdasd/Zodynas.txt";
+                    string tempFailas = Console.ReadLine();
+                    if (File.Exists(tempFailas))
+                    {
+                        using (StreamReader sr = new StreamReader(tempFailas)) //bandoma sutvarkyti nesirodancias lenkų/lietuvių raides
+                        {
+                            string line = sr.ReadLine();
+
+                            while (!string.IsNullOrEmpty((line = sr.ReadLine())))
+                            {
+
+                                // Vardas Pavardė ND1 ND2 ND3 ND4 ND5 Egzaminas
+                                var reiksmes = line.Split(" ");
+                                var vardas = reiksmes[0];
+                                var pavarde = reiksmes[1];
+                                double[] namuDarbai = new double[5] { Convert.ToDouble(reiksmes[2]) , Convert.ToDouble(reiksmes[3]), Convert.ToDouble(reiksmes[4]), Convert.ToDouble(reiksmes[5]), Convert.ToDouble(reiksmes[6]) };
+                                double egzBalas = Convert.ToDouble(reiksmes[7]);
+                                studentai.Add(new Studentas(vardas, pavarde, namuDarbai, egzBalas));
+                                // C:\Users\Kristijonas\source\repos\Labaratoriniai_csharp\Labaratoriniai_csharp\Studentai.txt
+                                Console.WriteLine("pridetasstudentas " + vardas + " " + pavarde);
+                            }
+                        }
+                        Console.WriteLine("Failas egzistuoja ir yra ikeltas.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failas neegzistuoja.");
+
+                    }
+                }
+                    if (meniu.Equals("4"))
                 {
                     break;
                 }
