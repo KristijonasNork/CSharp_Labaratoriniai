@@ -18,5 +18,10 @@ namespace Labaratoriniai_csharp
             this.egzRez = egzRez;
         }
 
+        public string ToString()
+        {
+            return vardas + " " + pavarde + " " + ndRez[0] + " " + ndRez[1] + " " + ndRez[2] + " " + ndRez[3] + " " + ndRez[4] + " "+ egzRez;
+        }
+
     }
 }
