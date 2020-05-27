@@ -91,45 +91,30 @@ namespace Labaratoriniai_csharp
                 }
                 if (meniu.Equals("2"))
                 {
-                    Console.WriteLine("Parasykite 'vid' jei norite matyti vidurki arba bet ka kitka jei norite matyti mediana");
-                    var meniu2 = Console.ReadLine();
-                    if (meniu2.Equals("vid"))
+                    Console.WriteLine(String.Format("{0,-15} {1,-15} {2, -18} {3}", "Vardas", "Pavarde", "Galutinis (Vid.)", "Galutinis (Med.)" ));
+                    Console.WriteLine("-----------------------------------------------------------------------");
+                    studentai.Sort((x, y) => x.vardas.CompareTo(y.vardas));
+                    foreach (Studentas stud in studentai)
                     {
-                        Console.WriteLine(String.Format("{0,-15} {1,-15} {2}", "Vardas", "Pavarde", "Galutinis (Vid.)"));
-                        Console.WriteLine("-----------------------------------------------------------------------");
+                        double vidurkis = 0;
+                        double mediana = 0;
+                        foreach (double rezul in stud.ndRez)
+                        {
+                            vidurkis += rezul;
+                        }
+                        vidurkis = vidurkis / stud.ndRez.Length;
 
-                        studentai.Sort((x, y) => x.vardas.CompareTo(y.vardas));
-                        foreach (Studentas stud in studentai)
-                        {
-                            double vidurkis = 0;
-                            foreach (double rezul in stud.ndRez)
-                            {
-                                vidurkis += rezul;
-                            }
-                            vidurkis = vidurkis / stud.ndRez.Length;
-                            double galutinis = 0.3 * vidurkis + 0.7 * stud.egzRez;
-                            Console.WriteLine("{0,-15} {1,-15} {2}", stud.vardas, stud.pavarde, Math.Round(galutinis, 2));
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine(String.Format("{0,-15} {1,-15} {2}", "Vardas", "Pavarde", "Galutinis (Med.)"));
-                        Console.WriteLine("-----------------------------------------------------------------------");
-                        foreach (Studentas stud in studentai)
-                        {
-                            double mediana = 0;
-                            double[] rusiavimas = (double[])stud.ndRez.Clone();
-                            Array.Sort(rusiavimas);
-                            int mid = stud.ndRez.Length / 2;
-                            mediana = (stud.ndRez.Length % 2 != 0) ? (double)rusiavimas[mid] : ((double)rusiavimas[mid] + (double)rusiavimas[mid - 1]) / 2;
-                            double galutinis = 0.3 * mediana + 0.7 * stud.egzRez;
-                            Console.WriteLine("{0,-15} {1,-15} {2}", stud.vardas, stud.pavarde,Math.Round(galutinis, 2));
-                        }
+                        double[] rusiavimas = (double[])stud.ndRez.Clone();
+                        Array.Sort(rusiavimas);
+                        int mid = stud.ndRez.Length / 2;
+                        mediana = (stud.ndRez.Length % 2 != 0) ? (double)rusiavimas[mid] : ((double)rusiavimas[mid] + (double)rusiavimas[mid - 1]) / 2;
+                        double galutinis = 0.3 * mediana + 0.7 * stud.egzRez;
+                        double galutinis2 = 0.3 * vidurkis + 0.7 * stud.egzRez;
+                        Console.WriteLine("{0,-15} {1,-15} {2,9} {3, 18}", stud.vardas, stud.pavarde,Math.Round(galutinis2, 2), Math.Round(galutinis, 2));
                     }
                 }
                 if (meniu.Equals("3")) {
                     Console.WriteLine("Parasykite kelia iki norimo failo.");
-                    //string tempFailas = "C:/Users/Kristijonas/source/repos/asdasd/asdasd/Zodynas.txt";
                     string tempFailas = Console.ReadLine();
                     if (File.Exists(tempFailas))
                     {
