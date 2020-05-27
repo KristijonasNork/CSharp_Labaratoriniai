@@ -27,13 +27,13 @@ namespace Labaratoriniai_csharp
         {
             List<Studentas> studentai = new List<Studentas>();
             studentai.Add(new Studentas("Tomas", "Petraitis", new double[] { 4, 8.33, 3, 6, 7 }, 7));
-            studentai.Add(new Studentas("Adomas", "Adomaitis", new double[] {9, 8.7, 10.1, 9, 10 }, 9));
+            studentai.Add(new Studentas("Adomas", "Adomaitis", new double[] {9, 8.7, 10, 9, 10 }, 9));
             while (true)
             {
 
                 Console.WriteLine("1.irasyti studentus ");
                 Console.WriteLine("2.rodyti studentus "); 
-                Console.WriteLine("3.nuskaitymas i6 failo ir jo vaizdavimas");
+                Console.WriteLine("3.nuskaitymas is failo ir jo vaizdavimas");
                 Console.WriteLine("4.iseiti ");
                 var meniu = Console.ReadLine();
                 if (meniu.Equals("1")) {
@@ -59,15 +59,19 @@ namespace Labaratoriniai_csharp
                     }
                     else
                     {
-                        Console.WriteLine("parasykite studento balus, kai baigsite parasykite -1: ");
+                        Console.WriteLine("parasykite studento balus nuo 1 iki 10, kai baigsite parasykite -1: ");
                         while (balas != -1)
                         {
                             try
                             {
                                 balas = Convert.ToDouble(Console.ReadLine());
-                                if (balas != -1)
+                                if (balas != -1 && (1 <= balas) && (balas <= 10))
                                 {
                                     balai.Add(balas);
+                                }
+                                else
+                                {
+                                    Console.Write("blogai parasytas skaicius todel neisaugomas");
                                 }
                             }
                             catch (Exception ex)
@@ -93,7 +97,22 @@ namespace Labaratoriniai_csharp
                     }
                     else
                     {
-                        egzRez = Convert.ToDouble(Console.ReadLine());
+                        try
+                        {
+                            while(((1 <= egzRez) && (egzRez <= 10)))
+                            {
+                                egzRez = Convert.ToDouble(Console.ReadLine());
+                                if(((1 <= egzRez) && (egzRez <= 10)))
+                                {
+                                    Console.WriteLine("blogas skaicius");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            Console.WriteLine("blogai parasytas rezultatas");
+                        }
                     }
                     studentai.Add(new Studentas(vardas, pavarde, ndRez, egzRez));
                 }
@@ -111,7 +130,6 @@ namespace Labaratoriniai_csharp
                             vidurkis += rezul;
                         }
                         vidurkis = vidurkis / stud.ndRez.Length;
-
                         double[] rusiavimas = (double[])stud.ndRez.Clone();
                         Array.Sort(rusiavimas);
                         int mid = stud.ndRez.Length / 2;
