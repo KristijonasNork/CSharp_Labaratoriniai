@@ -19,7 +19,8 @@ namespace Labaratoriniai_csharp
                 Console.WriteLine("1.irasyti studentus ");
                 Console.WriteLine("2.rodyti studentus "); 
                 Console.WriteLine("3.nuskaitymas is failo ir jo vaizdavimas");
-                Console.WriteLine("4.iseiti ");
+                Console.WriteLine("4.sukurti 5 failus ");
+                Console.WriteLine("5.iseiti ");
                 var meniu = Console.ReadLine();
                 if (meniu.Equals("1")) {
                     Random rnd = new Random();
@@ -130,6 +131,10 @@ namespace Labaratoriniai_csharp
                     Console.WriteLine("Pridėti studentai");
                 }
                 if (meniu.Equals("4"))
+                {
+                    m.generuotiFailus();
+                }
+                if (meniu.Equals("5"))
                 {
                     break;
                 }
