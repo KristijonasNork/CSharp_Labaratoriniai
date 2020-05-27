@@ -48,5 +48,29 @@ namespace Labaratoriniai_csharp
             }
             return studentai;
         }
+
+        public void generuotiFailus()
+        {
+            Random rnd = new Random();
+            for (int i = 1; i <= 5; i++)
+            {
+                using (StreamWriter file = new StreamWriter("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/studentai" + i + ".txt"))
+                {
+                    
+                    for (int j = 1; j <= Math.Pow(10, i); j++)
+                    {
+                        string vardas = "Vardas" + j;
+                        string pavarde = "Pavarde" + j;
+                        int egzRez = rnd.Next(1, 11);
+                        double[] ndRez = new double[5];
+                        for (int n = 0; n < 5; n++)
+                            ndRez[n] = rnd.Next(1, 11);
+                        Studentas studentas = new Studentas(vardas, pavarde, ndRez, egzRez);
+                        file.WriteLine(studentas);
+                    }
+
+                }
+            }
+        }
     }
 }
