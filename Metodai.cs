@@ -7,14 +7,12 @@ namespace Labaratoriniai_csharp
 {
     public class Metodai
     {
-        public List<Studentas> ReadFromFile()
+        public List<Studentas> ReadFromFile(string filePath = "C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/Studentai.txt")
         {
             var studentai = new List<Studentas>();
-            Console.WriteLine("Parasykite kelia iki norimo failo.");
-            string tempFailas = Console.ReadLine();
-            if (File.Exists(tempFailas))
+            if (File.Exists(filePath))
             {
-                using (StreamReader sr = new StreamReader(tempFailas))
+                using (StreamReader sr = new StreamReader(filePath))
                 {
                     string line = sr.ReadLine();
                     while (!string.IsNullOrEmpty((line = sr.ReadLine())))
@@ -25,12 +23,12 @@ namespace Labaratoriniai_csharp
                             var reiksmes = line.Split(" ");
                             var vardas = reiksmes[0];
                             var pavarde = reiksmes[1];
-                            Console.WriteLine(reiksmes);
+                            //Console.WriteLine(reiksmes);
                             double[] namuDarbai = new double[5] { Convert.ToDouble(reiksmes[2]), Convert.ToDouble(reiksmes[3]), Convert.ToDouble(reiksmes[4]), Convert.ToDouble(reiksmes[5]), Convert.ToDouble(reiksmes[6]) };
                             double egzBalas = Convert.ToDouble(reiksmes[7]);
                             studentai.Add(new Studentas(vardas, pavarde, namuDarbai, egzBalas));
                             // C:\Users\Kristijonas\source\repos\Labaratoriniai_csharp\Labaratoriniai_csharp\Studentai.txt
-                            Console.WriteLine("pridetasstudentas " + vardas + " " + pavarde);
+                            //Console.WriteLine("pridetasstudentas " + vardas + " " + pavarde);
                         }
                         catch (Exception e)
                         {
@@ -38,8 +36,9 @@ namespace Labaratoriniai_csharp
                             Console.WriteLine("blogai suformatuotas failas");
                             break;
                         }
-                        Console.WriteLine("Failas egzistuoja ir yra ikeltas.");
+                        
                     }
+                    Console.WriteLine("Failas egzistuoja ir yra ikeltas.");
                 }
             }
             else
@@ -70,6 +69,36 @@ namespace Labaratoriniai_csharp
                     }
 
                 }
+            }
+        }
+        public void rusiuotiFailus()
+        {
+            using (StreamWriter file = new StreamWriter("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/nuskriaustukai.txt")) { 
+
+                using (StreamWriter file2 = new StreamWriter("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/kietiakiai.txt")) { 
+                    for (int i = 1; i <= 5; i++)
+                    {
+                        foreach (Studentas stud in ReadFromFile("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/studentai" + i + ".txt"))
+                        {
+                            double vidurkis = 0;
+                            foreach (double rezul in stud.ndRez)
+                            {
+                                vidurkis += rezul;
+                            }
+                            vidurkis = vidurkis / stud.ndRez.Length;
+                            double galutinis = 0.3 * vidurkis + 0.7 * stud.egzRez;
+                            if (galutinis < 5)
+                            {
+                                file.WriteLine(stud.ToString());
+                            }
+                            else
+                            {
+                                file2.WriteLine(stud.ToString());
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }
