@@ -126,13 +126,15 @@ namespace Labaratoriniai_csharp
                     }
                 }
                 if (meniu.Equals("3")) {
-                    foreach (Studentas s in m.ReadFromFile())
+
+                    foreach (Studentas s in m.ReadFromFile(Console.ReadLine()))
                         studentai.Add(s);
                     Console.WriteLine("Pridėti studentai");
                 }
                 if (meniu.Equals("4"))
                 {
                     m.generuotiFailus();
+                    m.rusiuotiFailus();
                 }
                 if (meniu.Equals("5"))
                 {
