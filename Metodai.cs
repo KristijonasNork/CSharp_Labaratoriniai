@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -53,6 +54,8 @@ namespace Labaratoriniai_csharp
             Random rnd = new Random();
             for (int i = 1; i <= 5; i++)
             {
+                Stopwatch laikmatis = new Stopwatch();
+                laikmatis.Start();
                 using (StreamWriter file = new StreamWriter("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/studentai" + i + ".txt"))
                 {
                     
@@ -69,6 +72,9 @@ namespace Labaratoriniai_csharp
                     }
 
                 }
+                laikmatis.Stop();
+                Console.WriteLine(((double)laikmatis.ElapsedMilliseconds / 1000) + " s");
+
             }
         }
         public void rusiuotiFailus()
