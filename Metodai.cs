@@ -84,6 +84,8 @@ namespace Labaratoriniai_csharp
                 using (StreamWriter file2 = new StreamWriter("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/kietiakiai.txt")) { 
                     for (int i = 1; i <= 5; i++)
                     {
+                        Stopwatch laikmatis = new Stopwatch();
+                        laikmatis.Start();
                         foreach (Studentas stud in ReadFromFile("C:/Users/Kristijonas/source/repos/Labaratoriniai_csharp/Labaratoriniai_csharp/studentai" + i + ".txt"))
                         {
                             double vidurkis = 0;
@@ -102,6 +104,8 @@ namespace Labaratoriniai_csharp
                                 file2.WriteLine(stud.ToString());
                             }
                         }
+                        laikmatis.Stop();
+                        Console.WriteLine(((double)laikmatis.ElapsedMilliseconds / 1000) + " s. Studentai" + i + ".txt");
                     }
                 }
 
